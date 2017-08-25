@@ -92,7 +92,7 @@ def spamTest():
         fullText.extend(wordList)
         classList.append(0)
     vocabList = createVocabList(docList)#create vocabulary
-    trainingSet = range(50); testSet=[]           #create test set
+    trainingSet = list(range(50)); testSet=[]           #create test set   #python 2.x   range(50)
     for i in range(10):
         randIndex = int(random.uniform(0,len(trainingSet)))
         testSet.append(trainingSet[randIndex])
@@ -116,11 +116,12 @@ def calcMostFreq(vocabList,fullText):
     freqDict = {}
     for token in vocabList:
         freqDict[token]=fullText.count(token)
-    sortedFreq = sorted(freqDict.iteritems(), key=operator.itemgetter(1), reverse=True) 
+    #     python 2.x iteritems()
+    sortedFreq = sorted(freqDict.items(), key=operator.itemgetter(1), reverse=True)
     return sortedFreq[:30]       
 
 def localWords(feed1,feed0):
-    # import feedparser
+    import feedparser
     docList=[]; classList = []; fullText =[]
     minLen = min(len(feed1['entries']),len(feed0['entries']))
     for i in range(minLen):
